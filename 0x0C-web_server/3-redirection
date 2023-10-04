@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Redirection
+
+# Install Nginx
+# Update package lists
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Create a simple webpage
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Define the new replacement string
+string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/Youtube.com\/@Cornerstoneassembly_ng?si=nTZbSVZ2N-4k16ah permanent;"
+
+# Replace the existing configuration with the new string
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+
+# Restart Nginx to apply the changes
+sudo service nginx restart
