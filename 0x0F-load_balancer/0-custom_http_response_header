@@ -6,18 +6,18 @@ sudo apt update
 sudo apt -y install nginx
 
 # Create a custom page
-echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
 # Create redirection for /redirect_me
 sudo sed -i '/^\tlocation \/ {/a \ \t\trewrite ^/redirect_me https://google.com/?si=FnVhOo1Z-EHSWxbQ permanent;' /etc/nginx/sites-available/default
 
 # Create custom 404 settings and custom 404 page
-sudo sh -c "echo -e '\n\terror_page 404 /custom_404.html;\n\n\tlocation = /custom_404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}' > /etc/nginx/conf.d/custom_error_pages.conf"
+sudo sh -c "echo -e '\n\terror_page 404 /custom_404.html;\n\n\tlocation = /custom_404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}" > /etc/nginx/conf.d/custom_error_pages.conf"
 echo "Das ist keine Seite" | sudo tee /usr/share/nginx/html/custom_404.html > /dev/null
 
 # Create custom HTTP header identifying server hostname
 hostname=$(hostname)
-echo "add_header X-Served-By \"$hostname\";" | sudo tee -a /etc/nginx/nginx.conf > /dev/null
+echo "add_header X-Served-By \$hostname\;" | sudo tee -a /etc/nginx/nginx.conf > /dev/null
 
 # Allow HTTP connection through the firewall
 sudo ufw allow 'Nginx HTTP'
