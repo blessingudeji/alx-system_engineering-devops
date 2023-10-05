@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Not found page 404
+# Script that configures a new Ubuntu machine to respect above requirements
 
+# Update package lists
 # Install Nginx
-# Update system packages
 sudo apt-get update
 sudo apt-get install -y nginx
 
