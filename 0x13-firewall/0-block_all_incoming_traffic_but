@@ -1,0 +1,15 @@
+#!/bin/bash
+# Turns the firewall on
+sudo ufw enable
+
+# Enables port 22 responsible for SSH connection to server
+sudo ufw allow 22
+
+# Enables port 80 for transmitting web content
+sudo ufw allow 80
+
+# Enables port 443 for HTTPS
+sudo ufw allow 443
+
+# Checks firewall status
+sudo ufw status
